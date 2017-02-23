@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+	  <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery-3.0.0.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      var HOST_URL="http://localhost:8080";
+      //测试post data操作
+      function testPostData(postUrl, postData){
+        alert("post: "+postUrl+"\n"+JSON.stringify(postData))
+        $.ajax({
+            url: postUrl,
+            data: JSON.stringify(postData),
+            type: 'post',
+            contentType: 'application/json',
+            success:function(result){
+              var result=JSON.stringify(result);
+              alert(result);
+            },
+            error:function(result){
+              alert("error");
+              var result=JSON.stringify(result);
+              alert(result);
+            }
+           });
+        }
+      //测试get data操作
+      function testGetData(getUrl, getData){
+        alert("get: "+getUrl+"\n"+JSON.stringify(getData))
+        $.ajax({
+            url: getUrl,
+            data: getData,
+            type: 'get',
+            contentType: 'application/json',
+            success:function(result){
+              var result=JSON.stringify(result);
+              alert(result);
+            },
+            error:function(result){
+              alert("error");
+              var result=JSON.stringify(result);
+              alert(result);
+            }
+           });
+        }
+    </script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+
+        <h3>获取系统报告</h3>
+          <p>GET: /back/sysinfo/report</p>
+          <input class="btn btn-default" type="button" value="test" onclick="get_sysinfo_report()">
+          <script type="text/javascript">
+            function get_sysinfo_report(){
+              var testUrl=HOST_URL+"/back/sysinfo/report";
+              testGetData(testUrl,{});
+            }
+          </script>
+
+      <h3>登录</h3>
+        <p>POST: /back/users/login</p>
+        <input class="btn btn-default" type="button" value="test" onclick="post_login()">
+        <script type="text/javascript">
+          function post_login(){
+            var testUrl=HOST_URL+"/back/users/login";
+            var testData={"userName":"Guderian","password":"123456"};
+            testPostData(testUrl,testData);
+          }
+        </script>
+		
+      <h3>注册</h3>
+        <p>POST: /back/users/register</p>
+        <input class="btn btn-default" type="button" value="test" onclick="post_register()">
+        <script type="text/javascript">
+          function post_register(){
+            var testUrl=HOST_URL+"/back/users/register";
+            var testData={"userName":"Guderian","password":"123456","email":"heinz@landforce.de"};
+            testPostData(testUrl,testData);
+          }
+        </script>
+
+<!--test end -->
+      </div>
+    </div>
+  </body>
+</html>

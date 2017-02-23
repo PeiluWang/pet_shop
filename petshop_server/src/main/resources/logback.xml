@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<contextName>pet_shop</contextName>
+	
+	<!-- 日志用到的变量 -->
+	<!-- <property name="LOG_DIR" value="/home/upa_data_fetch/logs" /> -->
+	<property name="LOG_DIR" value="logs" /> 
+	<property name="LOG_PATTERN"
+		value="%d{yyyy-MM-dd HH:mm:ss}\t%level\t%msg%n" />
+	
+	<!-- 输出日志 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>${LOG_PATTERN}</Pattern>
+		</layout>
+	</appender>
+	
+	<!-- 系统日志：调试 -->
+	<appender name="SYSTEM_DEBUG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/system_debug-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 系统日志：常规记录 -->
+	<appender name="SYSTEM_INFO"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/system_info-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 系统日志：警报 -->
+	<appender name="SYSTEM_WARN"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/system_warn-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 系统日志：严重 -->
+	<appender name="SYSTEM_ERROR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/system_error-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 访问接口记录日志 -->
+	<appender name="API_REQUEST"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/api_request_info-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}\t%msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 产品下载记录日志 -->
+	<appender name="PRODUCT_DOWNLOAD"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/product_download_info-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}\t%msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	
+	<!-- 产品改动记录日志 -->
+	<appender name="PRODUCT_SET"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover new file daily -->
+			<fileNamePattern>${LOG_DIR}/%d{yyyy, aux}/%d{MM, aux}/%d{dd, aux}/product_set_info-%d{yyyyMMdd}.%i.log</fileNamePattern>
+			<!-- each file should be at most 10MB, or will be splitted -->
+			<maxFileSize>10MB</maxFileSize>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}\t%msg%n</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+
+	<logger name="system" level="DEBUG">
+		<appender-ref ref="STDOUT"></appender-ref>
+		<appender-ref ref="SYSTEM_DEBUG"></appender-ref>
+		<appender-ref ref="SYSTEM_INFO"></appender-ref>
+		<appender-ref ref="SYSTEM_WARN"></appender-ref>
+		<appender-ref ref="SYSTEM_ERROR"></appender-ref>
+	</logger>
+	
+	<logger name="api_request" level="INFO">
+		<appender-ref ref="STDOUT"></appender-ref>
+		<appender-ref ref="API_REQUEST"></appender-ref>
+	</logger>
+	
+	<logger name="product_download" level="INFO">
+		<appender-ref ref="STDOUT"></appender-ref>
+		<appender-ref ref="PRODUCT_DOWNLOAD"></appender-ref>
+	</logger>
+	
+	<logger name="product_set" level="INFO">
+		<appender-ref ref="STDOUT"></appender-ref>
+		<appender-ref ref="PRODUCT_SET"></appender-ref>
+	</logger>
+
+</configuration>
